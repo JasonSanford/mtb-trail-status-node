@@ -2,33 +2,46 @@ var fs = require('fs');
 
 var cheerio = require('cheerio');
 
-var html = fs.readFileSync('test.html');
-var $ = cheerio.load(html);
+var html     = fs.readFileSync('test.html');
+var $        = cheerio.load(html);
 var $strongs = $('strong');
 
-var $open = $strongs.filter(function (i, elem) {
-  return elem.children[0].data === 'Open';
+var openOrClosedElements = [];
+
+var openTrails   = [];
+var closedTrails = [];
+
+$strongs.each(function (i, elem) {
+  if (['Open', 'Closed'].indexOf(elem.children[0].data) > -1) {
+    elem.openOrClosed = elem.children[0].data;
+    openOrClosedElements.push(elem);
+  }
 });
 
-var $closed = $strongs.filter(function (i, elem) {
-  return elem.children[0].data === 'Closed';
-});
+openOrClosedElements.forEach(function (elem) {
+  var name = $(elem.parent.parent.parent.parent.parent.parent).prev('tr').find('td > b').text();
+  //                font   td     tr     table  td     tr
 
-var opens = $open.map(function (i, elem) {
-  var name = $(
-    elem.parent // font
-    .parent     // td
-    .parent     // tr
-    .parent     // table
-    .parent     // td
-    .parent).prev('tr').find('td > b')[0].children[0].data;
+  var dateTimeString = $(elem.parent.parent).find('em').text()
 
-  return {
-    name: name
+  var trail = {
+    name           : name,
+    dateTimeString : dateTimeString
   };
+
+  if (elem.openOrClosed === 'Open') {
+    openTrails.push(trail);
+  } else {
+    closedTrails.push(trail);
+  }
 });
 
-opens.each(function (i, open) {
+console.log('Open: ');
+openTrails.forEach(function (open) {
   console.log(open);
-})
-//console.log(opens);
+});
+
+console.log('Closed: ');
+closedTrails.forEach(function (open) {
+  console.log(open);
+});
