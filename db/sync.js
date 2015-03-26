@@ -1,11 +1,7 @@
 #!/usr/bin/env node
 
-var orm = require('orm');
-
-var connectionString = require('./connection_string');
-var modelDefinitions = require('./model_definitions');
-var trails           = require('../trails').all;
-var models           = require('./models');
+var trails = require('../trails').all;
+var models = require('./models');
 
 models.Trail.sync({force: true}).then(function () {
   trails.forEach(function (trail) {

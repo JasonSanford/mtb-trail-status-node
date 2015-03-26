@@ -13,6 +13,14 @@ module.exports = function(sequelize, DataTypes) {
     },
     status_date: {
       type: DataTypes.DATE
+    },
+    latitude: {
+      type: DataTypes.FLOAT,
+      allowNull: false
+    },
+    longitude: {
+      type: DataTypes.FLOAT,
+      allowNull: false
     }
   }, {
     timestamps: true,
