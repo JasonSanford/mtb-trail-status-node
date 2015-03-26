@@ -9,6 +9,9 @@
   "author": "Jason Sanford",
   "license": "MIT",
   "dependencies": {
-    "cheerio": "^0.18.0"
+    "cheerio": "^0.18.0",
+    "lodash": "^3.6.0",
+    "orm": "^2.1.24",
+    "pg": "^4.3.0"
   }
 }
