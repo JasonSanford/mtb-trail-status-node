@@ -3,6 +3,18 @@ body {
   padding-bottom: 20px;
 }
 
+.header {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 20px;
+}
+
+.header h3 {
+  line-height: 40px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .footer {
   color: #777;
   padding-top: 19px;
@@ -35,6 +47,18 @@ tr.trail td {
   vertical-align: middle !important;
   border: none !important;
   padding: 20px !important;
+}
+
+tr.trail td.date {
+  text-align: right;
+}
+
+tr.trail td.date span.open {
+  color: #060;
+}
+
+tr.trail td.date span.closed {
+  color: #900;
 }
 
 tr.trail h3 {

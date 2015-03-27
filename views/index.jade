@@ -19,15 +19,18 @@ block content
               i.glyphicon(class='#{glyphicon} #{trail.status}')
               | 
               =trail.name
-          td
+          td.date.text-muted
             - localDate = trail.status_date.toLocaleDateString()
             - localTime = trail.status_date.toLocaleTimeString()
             - timeParts = localTime.split(' ')
             - hourParts = timeParts[0].split(':')
             - time      = hourParts.splice(0, 2).join(':')
-            span.pull-right.text-muted
-              =localDate
-              |, 
-              =time
-              | 
-              =timeParts[1].toLowerCase()
+            span(class='#{trail.status}')
+              =trail.status
+            | 
+            |as of 
+            =localDate
+            |, 
+            =time
+            | 
+            =timeParts[1].toLowerCase()
