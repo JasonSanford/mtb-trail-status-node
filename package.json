@@ -11,8 +11,9 @@
   "dependencies": {
     "cheerio": "^0.18.0",
     "lodash": "^3.6.0",
-    "sequelize": "^2.0.5",
     "pg": "^4.3.0",
-    "pg-hstore": "^2.3.1"
+    "pg-hstore": "^2.3.1",
+    "request": "^2.54.0",
+    "sequelize": "^2.0.5"
   }
 }
