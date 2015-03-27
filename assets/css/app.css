@@ -1,0 +1,50 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.footer {
+  color: #777;
+  padding-top: 19px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.jumbotron {
+  text-align: center;
+}
+
+.jumbotron h1 {
+  font-size: 55px;
+}
+
+.jumbotron h2 {
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+
+tr.trail {
+  margin-bottom: 10px;
+}
+
+tr.trail td {
+  vertical-align: middle !important;
+  border: none !important;
+  padding: 20px !important;
+}
+
+tr.trail h3 {
+  display: inline;
+}
+
+tr.trail i.open {
+  color: #060;
+}
+
+tr.trail i.closed {
+  color: #900;
+}
