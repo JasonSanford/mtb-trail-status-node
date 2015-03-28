@@ -15,7 +15,7 @@ block content
         tr.trail
           td
             h3
-              - glyphicon = trail.status === "open" ? 'glyphicon-ok' : 'glyphicon-remove'
+              - glyphicon = trail.status === 'open' ? 'glyphicon-ok' : 'glyphicon-remove'
               i.glyphicon(class='#{glyphicon} #{trail.status}')
               | 
               =trail.name
