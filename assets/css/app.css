@@ -23,6 +23,7 @@ body {
 
 .jumbotron {
   text-align: center;
+  padding: 30px;
 }
 
 .jumbotron h1 {
@@ -31,6 +32,17 @@ body {
 
 .jumbotron h2 {
   margin-top: 0;
+}
+
+.jumbotron .phone-input {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.jumbotron p.details {
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 @media (min-width: 768px) {

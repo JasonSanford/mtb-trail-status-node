@@ -26,9 +26,13 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: true,
     underscored: true,
     freezeTableName: true,
-    tableName: 'trails'
+    tableName: 'trails',
+    classMethods: {
+      associate: function (models) {
+        Trail.belongsToMany(models.Phone, {through: 'PhoneTrail', as: 'phones'});
+      }
+    }
   });
 
   return Trail;
 };
-
