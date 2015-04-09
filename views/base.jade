@@ -19,6 +19,9 @@ html(lang='en')
             li(role='presentation')
               a(href='#') About
         h3.text-muted CLT Trails
+      - if (messages.success)
+        .alert.alert-success
+          span= messages.success
       block content
       footer.footer
         p

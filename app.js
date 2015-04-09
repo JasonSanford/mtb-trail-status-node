@@ -1,4 +1,6 @@
 var express = require('express');
+var flash = require('express-flash');
+var session = require('express-session');
 
 var models = require('./db/models');
 
@@ -10,6 +12,8 @@ app.set('view engine', 'jade');
 
 app.use(express.static('assets'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({ cookie: { maxAge: 60000 }, secret: 'whatever'}));
+app.use(flash());
 
 app.get('/', function (req, res) {
   models.Trail.findAll({order: [['status', 'DESC']]})
@@ -42,7 +46,7 @@ function handlePhoneFormRequest (req, res) {
                   }
                   return allTrail;
                 });
-                res.render('form', {created: created, formTrails: formTrails});
+                res.render('form', {formTrails: formTrails});
               } else {
                 var checkedIds = Object.keys(req.body).map(function (stringId) {
                   return parseInt(stringId, 10);
@@ -51,6 +55,7 @@ function handlePhoneFormRequest (req, res) {
                   if (error) {
                     res.send('Error: ' + error);
                   } else {
+                    req.flash('success', 'Your trail message alert settings were updated.');
                     res.redirect('/' + req.params.phone_number);
                   }
                 });
