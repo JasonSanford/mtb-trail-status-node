@@ -29,9 +29,8 @@ block content
           td.date.text-muted
             - localDate = trail.status_date.toLocaleDateString()
             - localTime = trail.status_date.toLocaleTimeString()
-            - timeParts = localTime.split(' ')
-            - hourParts = timeParts[0].split(':')
-            - time      = hourParts.splice(0, 2).join(':')
+            - timeParts = localTime.split(':')
+            - time      = timeParts.splice(0, 2).join(':')
             span(class='#{trail.status}')
               =trail.status
             | 
@@ -39,5 +38,3 @@ block content
             =localDate
             |, 
             =time
-            | 
-            =timeParts[1].toLowerCase()

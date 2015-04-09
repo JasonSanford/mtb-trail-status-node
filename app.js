@@ -3,11 +3,13 @@ var express = require('express');
 var models = require('./db/models');
 
 var app = express();
+var bodyParser = require('body-parser');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
 app.use(express.static('assets'));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function (req, res) {
   models.Trail.findAll({order: [['status', 'DESC']]})
@@ -33,14 +35,30 @@ function handlePhoneFormRequest (req, res) {
           });
           models.Trail.all()
             .then(function (allTrails) {
-              var formTrails = allTrails.map(function (allTrail) {
-                if (phoneTrailsIds.indexOf(allTrail.id) > -1) {
-                  allTrail.stored = true;
-                }
-                return allTrail;
-              });
-              res.render('form', {created: created, formTrails: formTrails});
+              if (req.method === 'GET') {
+                var formTrails = allTrails.map(function (allTrail) {
+                  if (phoneTrailsIds.indexOf(allTrail.id) > -1) {
+                    allTrail.stored = true;
+                  }
+                  return allTrail;
+                });
+                res.render('form', {created: created, formTrails: formTrails});
+              } else {
+                var checkedIds = Object.keys(req.body).map(function (stringId) {
+                  return parseInt(stringId, 10);
+                });
+                updatePhoneTrails(phone, phoneTrails, checkedIds, function (error) {
+                  if (error) {
+                    res.send('Error: ' + error);
+                  } else {
+                    res.redirect('/' + req.params.phone_number);
+                  }
+                });
+              }
             })
+            .catch(function (error) {
+              res.send('Error: ' + error);
+            });
         })
         .catch(function (error) {
           res.send('Error: ' + error);
@@ -49,6 +67,26 @@ function handlePhoneFormRequest (req, res) {
     .catch(function (error) {
       res.send('Error: ' + error);
     });
+}
+
+function updatePhoneTrails(phone, phoneTrails, checkedIds, callback) {
+  // Delete current PhoneTrails that aren't checked
+  phoneTrails.forEach(function (phoneTrail) {
+    if (checkedIds.indexOf(phoneTrail.id) < 0) {
+      phone.removeTrail(phoneTrail);
+    }
+  });
+
+  // Add new PhoneTrails if they don't already exist
+  checkedIds.forEach(function (checkedId) {
+    phone.hasTrail(checkedId)
+      .then(function (hasTrail) {
+        if (!hasTrail) {
+          phone.addTrail(checkedId);
+        }
+      });
+  });
+  callback(null);
 }
 
 var port = Number(process.env.PORT || 5000);
