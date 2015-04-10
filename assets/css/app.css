@@ -51,6 +51,29 @@ body {
   }
 }
 
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  .container > h2 {
+    text-align: center;
+  }
+
+  .jumbotron h1 {
+    font-size: 36px;
+  }
+
+  .jumbotron h2 {
+    font-size: 25px;
+  }
+
+  .jumbotron .phone-input {
+    width: 100%;
+  }
+
+  .jumbotron .input-phone {
+    padding: 10px;
+    text-align: center;
+  }
+}
+
 tr.trail {
   margin-bottom: 10px;
 }

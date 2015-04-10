@@ -15,7 +15,10 @@ block content
           | Get Started!
     p.details
       em= 'Choose the trails you want to receive messages for on the next screen.'
-  h2 Charlotte Area Mountain Bike Trail Statuses
+
+  hr
+
+  h2 Current Trail Statuses
   table.table.table-striped
     tbody
       each trail in trails
@@ -31,10 +34,7 @@ block content
             - localTime = trail.status_date.toLocaleTimeString()
             - timeParts = localTime.split(':')
             - time      = timeParts.splice(0, 2).join(':')
-            span(class='#{trail.status}')
-              =trail.status
-            | 
-            |as of 
+            |updated 
             =localDate
             |, 
             =time
