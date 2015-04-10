@@ -8,11 +8,11 @@ block content
         h2 for charlotte area trails
         p
           | Be the first to know when trails open or close. We constantly monitor trail status updates and text you as soon as your favorite trail opens or closes.
-        .input-group.input-group-lg.phone-input
-          input.input-phone.form-control(type='text', placeholder='704-555-5555')
-          span.input-group-btn
-            a.btn.btn-success.link-phone(href='#')
-              | Get Started!
+        form.form-phone
+          .input-group.input-group-lg.phone-input
+            input.input-phone.form-control(type='text', placeholder='704-555-5555')
+            span.input-group-btn
+              input.btn.btn-success.submit-phone(href='#', type='submit', valule='Get Started!')
         p.details
           em= 'Choose the trails you want to receive messages for on the next screen.'
 
