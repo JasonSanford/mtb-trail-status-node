@@ -15,6 +15,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ cookie: { maxAge: 60000 }, secret: 'whatever'}));
 app.use(flash());
 
+app.post('/twilio', function (req, res) {
+  console.log(JSON.stringify(req.body));
+});
+
 app.get('/', function (req, res) {
   models.Trail.findAll({order: [['status', 'DESC']]})
     .then(function (trails) {
