@@ -26,10 +26,11 @@ block content
           tr.trail
             td.name
               h3
-                - glyphicon = trail.status === 'open' ? 'glyphicon-ok' : 'glyphicon-remove'
-                i.glyphicon(class='#{glyphicon} #{trail.status}')
-                | 
-                =trail.name
+                a(href='/trails/#{trail.id}')
+                  - glyphicon = trail.status === 'open' ? 'glyphicon-ok' : 'glyphicon-remove'
+                  i.glyphicon(class='#{glyphicon} #{trail.status}')
+                  | 
+                  =trail.name
             td.date.text-muted
               span(title='#{trail.status_date}')
                 =trail.statusDateFromNow()

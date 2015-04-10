@@ -15,8 +15,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ cookie: { maxAge: 60000 }, secret: 'whatever'}));
 app.use(flash());
 
+function render404 (req, res) {
+  res.status(404);
+  res.render('404');
+}
+
 app.post('/twilio', function (req, res) {
   console.log(JSON.stringify(req.body));
+});
+
+app.get('/trails/:id', function (req, res) {
+  var trailId = parseInt(req.params.id, 10);
+
+  if (isNaN(trailId)) {
+    render404(req, res);
+    return;
+  }
+
+  models.Trail.find(trailId)
+    .then(function (trail) {
+      if (trail) {
+        res.render('trail', {trail: trail});
+      } else {
+        render404(req, res);
+      }
+    });
 });
 
 app.get('/', function (req, res) {

@@ -78,6 +78,10 @@ table.statuses tr.trail h3 {
   display: inline;
 }
 
+table.statuses tr.trail h3 a {
+  color: #333;
+}
+
 table.statuses tr.trail i.open {
   color: #060;
 }
