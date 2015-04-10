@@ -12,12 +12,12 @@ var tarheelTrailNames = tarheelTrails.map(function (tarheelTrail) {
   return tarheelTrail.name;
 });
 
-var tarheelUrl = 'http://www.tarheeltrailblazers.com/'
+var tarheelUrl = 'http://www.tarheeltrailblazers.com/';
 
 request(tarheelUrl, function(error, response, body) {
   if (error) { throw error; }
   parsePage(body);
-})
+});
 
 function parsePage(pageHtml) {
   //pageHtml = fs.readFileSync('test.html');
@@ -42,11 +42,18 @@ function parsePage(pageHtml) {
     var isInWhiteList = tarheelTrailNames.indexOf(name) > -1;
 
     if (isInWhiteList) {
-      var dateTimeString = $(elem.parent.parent).find('em').text();
+      var dateTimeString = $(elem.parent.parent).find('em').text().trim();
+
+      var statusDate = utils.dateTimeStringToDate(dateTimeString);
+
+      // Just double check that we got a valid date. Lots of things can go wrong here.
+      if (statusDate.toString() === 'Invalid Date') {
+        statusDate = new Date();
+      }
 
       var openOrClosedTrail = {
         name: name,
-        status_date: utils.dateTimeStringToDate(dateTimeString),
+        status_date: statusDate,
         status: elem.openOrClosed.toLowerCase()
       };
 
