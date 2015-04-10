@@ -51,9 +51,51 @@ body {
   }
 }
 
+table.statuses tr.trail {
+  margin-bottom: 10px;
+}
+
+table.statuses tr.trail td {
+  vertical-align: middle !important;
+  border: none !important;
+  padding: 20px !important;
+}
+
+table.statuses tr.trail td.date {
+  text-align: right;
+}
+
+table.statuses tr.trail h3 {
+  display: inline;
+}
+
+table.statuses tr.trail i.open {
+  color: #060;
+}
+
+table.statuses tr.trail i.closed {
+  color: #900;
+}
+
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
   .container > h2 {
     text-align: center;
+  }
+
+  table.statuses tr.trail h3{
+    font-size: 18px;
+  }
+
+  table.statuses tr.trail td {
+    padding: 10px !important;
+  }
+
+  table.statuses tr.trail td.name {
+    padding-right: 0 !important;
+  }
+
+  table.statuses tr.trail td.date {
+    padding-left: 0 !important;
   }
 
   .jumbotron h1 {
@@ -72,38 +114,4 @@ body {
     padding: 10px;
     text-align: center;
   }
-}
-
-tr.trail {
-  margin-bottom: 10px;
-}
-
-tr.trail td {
-  vertical-align: middle !important;
-  border: none !important;
-  padding: 20px !important;
-}
-
-tr.trail td.date {
-  text-align: right;
-}
-
-tr.trail td.date span.open {
-  color: #060;
-}
-
-tr.trail td.date span.closed {
-  color: #900;
-}
-
-tr.trail h3 {
-  display: inline;
-}
-
-tr.trail i.open {
-  color: #060;
-}
-
-tr.trail i.closed {
-  color: #900;
 }

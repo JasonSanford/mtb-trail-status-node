@@ -19,11 +19,11 @@ block content
   hr
 
   h2 Current Trail Statuses
-  table.table.table-striped
+  table.table.table-striped.statuses
     tbody
       each trail in trails
         tr.trail
-          td
+          td.name
             h3
               - glyphicon = trail.status === 'open' ? 'glyphicon-ok' : 'glyphicon-remove'
               i.glyphicon(class='#{glyphicon} #{trail.status}')
