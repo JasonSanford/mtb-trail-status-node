@@ -21,9 +21,18 @@ body {
   border-top: 1px solid #e5e5e5;
 }
 
+.full-panel {
+  padding: 20px;
+  background-image: url(../img/bike-bw.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
 .jumbotron {
   text-align: center;
   padding: 30px;
+  background-color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0;
 }
 
 .jumbotron h1 {
@@ -78,6 +87,10 @@ table.statuses tr.trail i.closed {
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  .full-panel .container {
+    padding: 0;
+  }
+
   .container > h2 {
     text-align: center;
   }
@@ -98,12 +111,20 @@ table.statuses tr.trail i.closed {
     padding-left: 0 !important;
   }
 
+  .jumbotron {
+    padding: 20px;
+  }
+
   .jumbotron h1 {
     font-size: 36px;
   }
 
   .jumbotron h2 {
     font-size: 25px;
+  }
+
+  .jumbotron p {
+    font-size: 18px;
   }
 
   .jumbotron .phone-input {

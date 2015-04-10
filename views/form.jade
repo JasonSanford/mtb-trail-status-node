@@ -1,18 +1,19 @@
 extends base
 
 block content
-  h2 Set Up Your Messages
+  .container
+    h2 Set Up Your Messages
 
-  p Select the trails for which you want to receive text message alerts for closures and openings.
+    p Select the trails for which you want to receive text message alerts for closures and openings.
 
-  form.form-horizontal(method='post')
-    .form-group
-      .col-sm-10.col-sm-offset-2
-        each formTrail in formTrails
-          .checkbox
-            label
-              input(type='checkbox', name=formTrail.id, checked=formTrail.stored)
-              | #{formTrail.name}
-    .form-group
-      .col-sm-10.col-sm-offset-2
-        input.btn.btn-success(type='submit', value='Save')
+    form.form-horizontal(method='post')
+      .form-group
+        .col-sm-10.col-sm-offset-2
+          each formTrail in formTrails
+            .checkbox
+              label
+                input(type='checkbox', name=formTrail.id, checked=formTrail.stored)
+                | #{formTrail.name}
+      .form-group
+        .col-sm-10.col-sm-offset-2
+          input.btn.btn-success(type='submit', value='Save')

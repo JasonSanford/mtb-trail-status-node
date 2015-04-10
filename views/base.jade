@@ -4,7 +4,7 @@ html(lang='en')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible' content='IE=edge')
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    title CLT Trails
+    title Charlotte Mountain Bike Trail Statuses
     link(rel='stylesheet', type='text/css', href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
     link(rel='stylesheet', type='text/css', href='css/app.css')
   body
@@ -15,14 +15,16 @@ html(lang='en')
         nav
           ul.nav.nav-pills.pull-right
             li.active(role='presentation')
-              a(href='#') Home
+              a(href='/') Home
             li(role='presentation')
               a(href='#') About
-        h3.text-muted CLT Trails
+        h3.text-muted
+          a(href='/') CLT Trails
       - if (messages.success)
         .alert.alert-success
           span= messages.success
-      block content
+    block content
+    .container
       footer.footer
         p
           |&copy; CLT Trails, built by 
