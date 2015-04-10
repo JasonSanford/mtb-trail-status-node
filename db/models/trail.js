@@ -1,4 +1,5 @@
 var Twilio = require('twilio');
+var moment = require('moment');
 
 var constants = require('../../constants');
 
@@ -36,6 +37,11 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function (models) {
         Trail.belongsToMany(models.Phone, {through: 'PhoneTrail', as: 'phones'});
+      }
+    },
+    instanceMethods: {
+      statusDateFromNow: function () {
+        return moment(this.status_date).fromNow();
       }
     },
     hooks: {

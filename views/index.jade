@@ -30,11 +30,5 @@ block content
               | 
               =trail.name
           td.date.text-muted
-            - localDate = trail.status_date.toLocaleDateString()
-            - localTime = trail.status_date.toLocaleTimeString()
-            - timeParts = localTime.split(':')
-            - time      = timeParts.splice(0, 2).join(':')
-            |updated 
-            =localDate
-            |, 
-            =time
+            span(title='#{trail.status_date}')
+              =trail.statusDateFromNow()
