@@ -60,8 +60,6 @@ function parsePage(pageHtml) {
       models.Trail.find({where: {name: openOrClosedTrail.name}})
         .then(function (trail) {
           if (trail.status !== openOrClosedTrail.status) {
-            //console.log('The trail status for ' + trail.name + ' changed from ' + trail.status + ' to ' + openOrClosedTrail.status + '.');
-
             trail.updateAttributes({status: openOrClosedTrail.status, status_date: openOrClosedTrail.status_date})
               .then(function () {
                 console.log('Updated trail: ', trail.name);
@@ -71,7 +69,3 @@ function parsePage(pageHtml) {
     }
   });
 }
-
-
-
-
