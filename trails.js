@@ -72,6 +72,13 @@ var trails = [
     source: sources.TARHEEL_TRAILBLAZERS,
     latitude: 35.31747,
     longitude: -80.65552
+  },
+  {
+    id: 11,
+    name: 'USNWC Trails',
+    source: sources.TWITTER,
+    latitude: 35.272244,
+    longitude: -81.0050142
   }
 ];
 

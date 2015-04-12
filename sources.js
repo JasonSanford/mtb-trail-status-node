@@ -1,3 +1,4 @@
 module.exports = {
-  TARHEEL_TRAILBLAZERS: 1
+  TARHEEL_TRAILBLAZERS: 1,
+  TWITTER: 2
 };
