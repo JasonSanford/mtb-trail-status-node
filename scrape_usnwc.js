@@ -42,10 +42,10 @@ client.get('statuses/user_timeline', params, function(error, tweets, response){
 
   models.Trail.find(11)
     .then(function (trail) {
-      var source_date = new Date(tweet.created_at);
+      var status_date = new Date(tweet.created_at);
 
       if (trail.status !== openOrClosed) {
-        trail.source_date = source_date;
+        trail.status_date = status_date;
         trail.status = openOrClosed;
         trail.save();
       }
