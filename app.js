@@ -45,8 +45,12 @@ app.get('/trails/:id', function (req, res) {
 app.get('/', function (req, res) {
   models.Trail.findAll({order: [['status', 'DESC']]})
     .then(function (trails) {
-      res.render('index', {trails: trails});
+      res.render('index', {trails: trails, currentPage: 'home'});
     });
+});
+
+app.get('/about', function (req, res) {
+  res.render('about', {currentPage: 'about'});
 });
 
 var phoneNumberUrl = '/:phone_number(\\d{10})/';

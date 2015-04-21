@@ -14,10 +14,10 @@ html(lang='en')
       .header.clearfix
         nav
           ul.nav.nav-pills.pull-right
-            li.active(role='presentation')
+            li(role='presentation', class=(currentPage === 'home' ? 'active' : ''))
               a(href='/') Home
-            li(role='presentation')
-              a(href='#') About
+            li(role='presentation', class=(currentPage === 'about' ? 'active' : ''))
+              a(href='/about') About
         h3.text-muted
           a(href='/') CLT Trails
       - if (messages.success)
@@ -26,7 +26,9 @@ html(lang='en')
     block content
     .container
       footer.footer
-        p
-          |&copy; CLT Trails, built by 
+        p CLT Trails, built by 
           a(href='https://github.com/JasonSanford/') Jason Sanford
+          |. Trail statuses from 
+          a(href='/about') various sources
+          |.
     script(src='/js/main.js')
