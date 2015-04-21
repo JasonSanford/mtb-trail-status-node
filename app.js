@@ -43,7 +43,7 @@ app.get('/trails/:id', function (req, res) {
 });
 
 app.get('/', function (req, res) {
-  models.Trail.findAll({order: [['status', 'DESC']]})
+  models.Trail.findAll({order: [['status', 'DESC'], ['name', 'ASC']]})
     .then(function (trails) {
       res.render('index', {trails: trails, currentPage: 'home'});
     });
@@ -68,7 +68,7 @@ function handlePhoneFormRequest (req, res) {
           var phoneTrailsIds = phoneTrails.map(function (phoneTrail) {
             return phoneTrail.id;
           });
-          models.Trail.all()
+          models.Trail.all({order: [['name', 'ASC']]})
             .then(function (allTrails) {
               if (req.method === 'GET') {
                 var formTrails = allTrails.map(function (allTrail) {
