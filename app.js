@@ -35,7 +35,7 @@ app.get('/trails/:id', function (req, res) {
   models.Trail.find(trailId)
     .then(function (trail) {
       if (trail) {
-        res.render('trail', {trail: trail});
+        res.render('trail', {trail: trail, map: true});
       } else {
         render404(req, res);
       }

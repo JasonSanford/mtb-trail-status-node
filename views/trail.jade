@@ -1,5 +1,15 @@
 extends base
 
 block content
-  .container
-    h1 #{trail.name}
+  .container.trail
+    h2 #{trail.name}
+    .row.status
+      .col-md-6
+        h4 Status: 
+          span.label(class=(trail.status === 'open' ? 'label-success' : 'label-danger')) #{trail.status}
+      .col-md-6
+        h4 Updated: 
+          span.label.label-default(title='#{trail.status_date}') #{trail.statusDateFromNow()}
+    #map-container.map-container
+  script.
+    mtb.trail = !{JSON.stringify(trail.asGeoJSON())};

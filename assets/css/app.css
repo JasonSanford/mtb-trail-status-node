@@ -1,6 +1,7 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 .header {
@@ -144,4 +145,25 @@ table.statuses tr.trail i.closed {
     padding: 10px;
     text-align: center;
   }
+}
+
+.trail {
+
+}
+
+.trail .row.status {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.trail .row.status span.label{
+  font-weight: normal;
+  padding: 0 4px;
+}
+
+/*
+ * Map
+ */
+.map-container {
+  height: 400px;
 }

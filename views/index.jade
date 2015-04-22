@@ -32,5 +32,4 @@ block content
                   | 
                   =trail.name
             td.date.text-muted
-              span(title='#{trail.status_date}')
-                =trail.statusDateFromNow()
+              span(title='#{trail.status_date}') #{trail.statusDateFromNow()}

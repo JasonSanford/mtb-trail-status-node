@@ -28,6 +28,9 @@ module.exports = function(sequelize, DataTypes) {
     longitude: {
       type: DataTypes.FLOAT,
       allowNull: false
+    },
+    geojson: {
+      type: DataTypes.TEXT
     }
   }, {
     timestamps: true,
@@ -42,6 +45,29 @@ module.exports = function(sequelize, DataTypes) {
     instanceMethods: {
       statusDateFromNow: function () {
         return moment(this.status_date).fromNow();
+      },
+      asGeoJSON: function () {
+        var featureCollection, inflatedFeatureCollection, geomObj;
+        if (this.geojson) {
+          featureCollection = JSON.parse(this.geojson);
+
+          return featureCollection;
+        } else {
+          geomObj = {
+            type: 'Point',
+            coordinates: [this.longitude, this.latitude]
+          };
+
+          return {
+            type: 'Feature',
+            geometry: geomObj,
+            properties: {
+              name: this.name,
+              'marker-symbol': 'bicycle',
+              'marker-size': 'large'
+            }
+          };
+        }
       }
     },
     hooks: {
