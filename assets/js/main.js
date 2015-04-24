@@ -28,16 +28,27 @@ function isValidPhoneNumber (phoneNumber) {
 
 if (mtb.trail) {
   L.mapbox.accessToken = 'pk.eyJ1IjoiamNzYW5mb3JkIiwiYSI6InRJMHZPZFUifQ.F4DMGoNgU3r2AWLY0Eni-w';
-  var geojsonLayer = L.geoJson(mtb.trail, {
-    pointToLayer: L.mapbox.marker.style,
-    style: L.mapbox.simplestyle.style
+  var pointGeojsonLayer = L.geoJson(mtb.trail, {
+    pointToLayer: L.mapbox.marker.style
   });
   var map = L.mapbox.map('map-container', 'jcsanford.41fa2f6c');
-  map.addLayer(geojsonLayer);
+  map.addLayer(pointGeojsonLayer);
+  map.setView(L.latLng(mtb.trail.geometry.coordinates[1], mtb.trail.geometry.coordinates[0]), 13);
 
-  if (mtb.trail.type === 'FeatureCollection') {
-    map.fitBounds(geojsonLayer.getBounds());
-  } else {
-    map.setView(L.latLng(mtb.trail.geometry.coordinates[1], mtb.trail.geometry.coordinates[0]), 13);
+  if (mtb.trail.properties.has_geojson) {
+    var lineGeojsonLayer = L.geoJson(null, {
+      style: L.mapbox.simplestyle.style
+    });
+    lineGeojsonLayer.addTo(map);
+
+    $.ajax({
+      url: '/trails/' + mtb.trail.id + '.geojson',
+      success: function (data) {
+        lineGeojsonLayer.addData(data);
+      },
+      error: function (jqXHR, status, error) {
+        console.log('Error fetching trail GeoJSON: ' + error);
+      }
+    });
   }
 }

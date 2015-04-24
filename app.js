@@ -1,6 +1,7 @@
 var express = require('express');
 var flash = require('express-flash');
 var session = require('express-session');
+var request = require('request');
 
 var models = require('./db/models');
 
@@ -24,7 +25,7 @@ app.post('/twilio', function (req, res) {
   console.log(JSON.stringify(req.body));
 });
 
-app.get('/trails/:id', function (req, res) {
+app.use('/trails/:id', function (req, res, next) {
   var trailId = parseInt(req.params.id, 10);
 
   if (isNaN(trailId)) {
@@ -35,11 +36,22 @@ app.get('/trails/:id', function (req, res) {
   models.Trail.find(trailId)
     .then(function (trail) {
       if (trail) {
-        res.render('trail', {trail: trail, map: true});
+        req.trail = trail;
+        next();
       } else {
         render404(req, res);
       }
     });
+});
+
+app.get('/trails/:id.geojson', function (req, res) {
+  var githubRequest = request(req.trail.geojson_url);
+  req.pipe(githubRequest);
+  githubRequest.pipe(res);
+});
+
+app.get('/trails/:id', function (req, res) {
+  res.render('trail', {trail: req.trail, map: true});
 });
 
 app.get('/', function (req, res) {

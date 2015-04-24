@@ -48,6 +48,7 @@ module.exports = function(sequelize, DataTypes) {
       },
       asGeoJSON: function () {
         return {
+          id: this.id,
           type: 'Feature',
           geometry: {
             type: 'Point',
@@ -55,7 +56,7 @@ module.exports = function(sequelize, DataTypes) {
           },
           properties: {
             name: this.name,
-            trail_geojson_url: this.geojson_url,
+            has_geojson: this.geojson_url ? true : false,
             'marker-symbol': 'bicycle',
             'marker-size': 'large'
           }

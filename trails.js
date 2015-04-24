@@ -9,7 +9,7 @@ var trails = [
     source: sources.TARHEEL_TRAILBLAZERS,
     latitude: 35.67376,
     longitude: -80.93247,
-    geojson_url: 'https://raw.githubusercontent.com/JasonSanford/mtb-trails/master/trails/dist/lake_norman_state_park.geojson'
+    geojson_url: 'http://jasonsanford.github.io/mtb-trails/trails/dist/lake_norman_state_park.geojson'
   },
   {
     id: 2,
