@@ -31,7 +31,7 @@ if (mtb.trail) {
   var pointGeojsonLayer = L.geoJson(mtb.trail, {
     pointToLayer: L.mapbox.marker.style
   });
-  var map = L.mapbox.map('map-container', 'jcsanford.41fa2f6c');
+  var map = L.mapbox.map('map', 'jcsanford.41fa2f6c', {zoomControl: false});
   map.addLayer(pointGeojsonLayer);
   map.setView(L.latLng(mtb.trail.geometry.coordinates[1], mtb.trail.geometry.coordinates[0]), 13);
 
@@ -45,6 +45,7 @@ if (mtb.trail) {
       url: '/trails/' + mtb.trail.id + '.geojson',
       success: function (data) {
         lineGeojsonLayer.addData(data);
+        map.fitBounds(lineGeojsonLayer.getBounds());
       },
       error: function (jqXHR, status, error) {
         console.log('Error fetching trail GeoJSON: ' + error);

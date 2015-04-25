@@ -1,13 +1,29 @@
 body {
-  padding-top: 20px;
   padding-bottom: 20px;
   font-family: 'Titillium Web', sans-serif;
+  background: url(img/light_grey.png) #e0e0e0;
+}
+
+body.fullscreen {
+  padding-bottom: 0;
+}
+
+.top {
+  background-color: #5CB85C;
 }
 
 .header {
-  margin-bottom: 30px;
-  border-bottom: 1px solid #e5e5e5;
-  padding-bottom: 20px;
+  padding: 20px 0;
+  color: #fff;
+}
+
+.header ul.nav li.active a {
+  background-color: #fff;
+  color: #5CB85C;
+}
+
+.header a{
+  color: #fff;
 }
 
 .header h3 {
@@ -147,23 +163,31 @@ table.statuses tr.trail i.closed {
   }
 }
 
-.trail {
-
-}
-
-.trail .row.status {
-  margin-bottom: 10px;
-  font-size: 15px;
-}
-
-.trail .row.status span.label{
-  font-weight: normal;
-  padding: 0 4px;
-}
-
 /*
  * Map
  */
 .map-container {
-  height: 400px;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.map-container .meta {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9000;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.map-container .meta h2 {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.map-container .map {
+  height: 100%;
 }

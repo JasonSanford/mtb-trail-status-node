@@ -15,28 +15,30 @@ html(lang='en')
     link(rel='stylesheet', type='text/css', href='/css/app.css')
     script.
       var mtb = {};
-  body
-    .container
-      .header.clearfix
-        nav
-          ul.nav.nav-pills.pull-right
-            li(role='presentation', class=(currentPage === 'home' ? 'active' : ''))
-              a(href='/') Home
-            li(role='presentation', class=(currentPage === 'about' ? 'active' : ''))
-              a(href='/about') About
-        h3.text-muted
-          a(href='/') CLT Trails
-      - if (messages.success)
-        .alert.alert-success
-          span= messages.success
+  body(class=(fullscreen ? 'fullscreen' : ''))
+    .top
+      .container
+        .header.clearfix
+          nav
+            ul.nav.nav-pills.pull-right
+              li(role='presentation', class=(currentPage === 'home' ? 'active' : ''))
+                a(href='/') Home
+              li(role='presentation', class=(currentPage === 'about' ? 'active' : ''))
+                a(href='/about') About
+          h3.text-muted
+            a(href='/') CLT Trails
+        - if (messages.success)
+          .alert.alert-success
+            span= messages.success
     block content
-    .container
-      footer.footer
-        p CLT Trails, built by 
-          a(href='https://github.com/JasonSanford/') Jason Sanford
-          |. Trail statuses from 
-          a(href='/about') various sources
-          |.
+    block footer
+      .container
+        footer.footer
+          p CLT Trails, built by 
+            a(href='https://github.com/JasonSanford/') Jason Sanford
+            |. Trail statuses from 
+            a(href='/about') various sources
+            |.
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
     script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
     - if (map)

@@ -51,7 +51,11 @@ app.get('/trails/:id.geojson', function (req, res) {
 });
 
 app.get('/trails/:id', function (req, res) {
-  res.render('trail', {trail: req.trail, map: true});
+  res.render('trail', {
+    trail: req.trail,
+    map: true,
+    fullscreen: true
+  });
 });
 
 app.get('/', function (req, res) {
