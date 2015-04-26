@@ -80,6 +80,13 @@ var trails = [
     source: sources.TWITTER,
     latitude: 35.272244,
     longitude: -81.0050142
+  },
+  {
+    id: 12,
+    name: 'Rocky Branch Trail',
+    source: sources.TARHEEL_TRAILBLAZERS,
+    latitude: 35.2449197,
+    longitude: -81.0479374
   }
 ];
 
