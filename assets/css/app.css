@@ -1,8 +1,7 @@
 body {
   padding-bottom: 20px;
   font-family: 'Titillium Web', sans-serif;
-  background: url(img/light_grey.png) #e0e0e0;
-  background-size: 301px 621px;
+  background: url(img/pw_pattern.png) #e0e0e0;
 }
 
 body.fullscreen {
