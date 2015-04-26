@@ -2,6 +2,7 @@ body {
   padding-bottom: 20px;
   font-family: 'Titillium Web', sans-serif;
   background: url(img/light_grey.png) #e0e0e0;
+  background-size: 301px 621px;
 }
 
 body.fullscreen {
@@ -22,7 +23,7 @@ body.fullscreen {
   color: #5CB85C;
 }
 
-.header a{
+.header a {
   color: #fff;
 }
 
@@ -111,7 +112,58 @@ table.statuses tr.trail i.closed {
   color: #900;
 }
 
+/*
+ * Map
+ */
+.map-container {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.map-container .meta {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9000;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.map-container .meta h2 {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.map-container .map {
+  height: 100%;
+}
+
 @media only screen and (min-width : 320px) and (max-width : 480px) {
+  .header {
+    padding: 10px 0;
+  }
+
+  .map-container {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .map-container .meta h2 {
+    margin: 5px 0;
+    line-height: 0.8em;
+    text-align: center;
+  }
+
+  .map-container .meta h2 small {
+    display: block;
+  }
+
   .full-panel .container {
     padding: 0;
   }
@@ -161,33 +213,4 @@ table.statuses tr.trail i.closed {
     padding: 10px;
     text-align: center;
   }
-}
-
-/*
- * Map
- */
-.map-container {
-  position: absolute;
-  top: 80px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.map-container .meta {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 9000;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.map-container .meta h2 {
-  margin-top: 10px;
-  text-align: center;
-}
-
-.map-container .map {
-  height: 100%;
 }
