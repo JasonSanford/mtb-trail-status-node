@@ -27,9 +27,10 @@ html(lang='en')
                 a(href='/about') About
           h3.text-muted
             a(href='/') CLT Trails
-        - if (messages.success)
-          .alert.alert-success
-            span= messages.success
+    .container
+      - if (messages.success)
+        .alert.alert-success
+          span= messages.success
     block content
     block footer
       .container

@@ -33,6 +33,10 @@ body.fullscreen {
   margin-bottom: 0;
 }
 
+.alert {
+  margin: 10px 0;
+}
+
 .footer {
   color: #777;
   padding-top: 19px;
