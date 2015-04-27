@@ -17,19 +17,27 @@ block content
           em= 'Choose the trails you want to receive messages for on the next screen.'
 
   .container
-    hr
-
     h2 Current Trail Statuses
-    table.table.table-striped.statuses
-      tbody
-        each trail in trails
-          tr.trail
-            td.name
-              h3
-                a(href='/trails/#{trail.id}')
-                  - glyphicon = trail.status === 'open' ? 'glyphicon-ok' : 'glyphicon-remove'
-                  i.glyphicon(class='#{glyphicon} #{trail.status}')
-                  | 
-                  =trail.name
-            td.date.text-muted
-              span(title='#{trail.status_date}') #{trail.statusDateFromNow()}
+      .pull-right
+        .btn-group.btn-group-sm(role='group tab-list')
+          a.btn.btn-default(href='#tab-list', role='tab presentation', data-toggle='tab')
+            i.glyphicon.glyphicon-list
+          a.btn.btn-default(href='#tab-map', role='tab presentation', data-toggle='tab')
+            i.glyphicon.glyphicon-map-marker
+    .tab-content
+      .tab-pane.active(id='tab-list')
+        table.table.table-striped.statuses
+          tbody
+            each trail in trails
+              tr.trail
+                td.name
+                  h3
+                    a(href='/trails/#{trail.id}')
+                      - glyphicon = trail.status === 'open' ? 'glyphicon-ok' : 'glyphicon-remove'
+                      i.glyphicon(class='#{glyphicon} #{trail.status}')
+                      | 
+                      =trail.name
+                td.date.text-muted
+                  span(title='#{trail.status_date}') #{trail.statusDateFromNow()}
+      .tab-pane(id='tab-map')
+        #map.map

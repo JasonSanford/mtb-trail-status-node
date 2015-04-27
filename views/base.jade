@@ -15,7 +15,7 @@ html(lang='en')
     link(rel='stylesheet', type='text/css', href='/css/app.css')
     script.
       var mtb = {};
-  body(class=(fullscreen ? 'fullscreen' : ''))
+  body(class=(bodyClass || ''))
     .top
       .container
         .header.clearfix

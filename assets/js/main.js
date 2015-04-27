@@ -1,32 +1,59 @@
-var $form = $('.form-phone');
+var utils = require('./utils');
 
-var $inputPhone = $('.input-phone');
+if ($('body.index').length > 0) {
+  var $form = $('.form-phone');
+  var $inputPhone = $('.input-phone');
 
-$form.on('submit', function (event) {
-  event.preventDefault();
-  var phoneNumber = $inputPhone.val();
-  phoneNumber = sanitizePhoneNumber(phoneNumber);
+  var map;
+  var mapShown = false;
 
-  if (isValidPhoneNumber(phoneNumber)) {
-    window.location.href = '/' + phoneNumber;
-  } else {
-    window.alert('That phone number doesn\'t look right.');
-  }
-});
+  $form.on('submit', function (event) {
+    event.preventDefault();
+    var phoneNumber = $inputPhone.val();
+    phoneNumber = utils.sanitizePhoneNumber(phoneNumber);
 
-function sanitizePhoneNumber (phone) {
-  var sanitized = phone.replace(/-/g, '');
-  sanitized = sanitized.replace(/ /g, '');
-  sanitized = sanitized.replace(/\./g, '');
-  sanitized = sanitized.trim();
-  return sanitized;
+    if (utils.isValidPhoneNumber(phoneNumber)) {
+      window.location.href = '/' + phoneNumber;
+    } else {
+      window.alert('That phone number doesn\'t look right.');
+    }
+  });
+
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    if ($(e.target).attr('href') === '#tab-map') {
+      if (mapShown) {
+        map.invalidateSize();
+      } else {
+        L.mapbox.accessToken = 'pk.eyJ1IjoiamNzYW5mb3JkIiwiYSI6InRJMHZPZFUifQ.F4DMGoNgU3r2AWLY0Eni-w';
+        var pointGeojsonLayer = L.geoJson(mtb.trail, {
+          pointToLayer: L.mapbox.marker.style
+        });
+        map = L.mapbox.map('map', 'jcsanford.41fa2f6c', {zoomControl: false});
+        map.addLayer(pointGeojsonLayer);
+        map.setView(L.latLng(35.228082,-80.8442896), 9);
+        mapShown = true;
+
+        var lineGeojsonLayer = L.geoJson(null, {
+          pointToLayer: L.mapbox.marker.style
+        });
+        lineGeojsonLayer.addTo(map);
+
+        $.ajax({
+          url: '/trails.geojson',
+          success: function (data) {
+            lineGeojsonLayer.addData(data);
+            map.fitBounds(lineGeojsonLayer.getBounds());
+          },
+          error: function (jqXHR, status, error) {
+            console.log('Error fetching trail GeoJSON: ' + error);
+          }
+        });
+      }
+    }
+  });
 }
 
-function isValidPhoneNumber (phoneNumber) {
-  return phoneNumber.length === 10;
-}
-
-if (mtb.trail) {
+if ($('body.trail').length > 0) {
   L.mapbox.accessToken = 'pk.eyJ1IjoiamNzYW5mb3JkIiwiYSI6InRJMHZPZFUifQ.F4DMGoNgU3r2AWLY0Eni-w';
   var pointGeojsonLayer = L.geoJson(mtb.trail, {
     pointToLayer: L.mapbox.marker.style

@@ -54,15 +54,38 @@ app.get('/trails/:id', function (req, res) {
   res.render('trail', {
     trail: req.trail,
     map: true,
-    fullscreen: true
+    bodyClass: 'fullscreen trail'
   });
 });
 
-app.get('/', function (req, res) {
+app.use('/', function (req, res, next) {
   models.Trail.findAll({order: [['status', 'DESC'], ['name', 'ASC']]})
     .then(function (trails) {
-      res.render('index', {trails: trails, currentPage: 'home'});
+      req.trails = trails;
+      next();
     });
+});
+
+app.get('/', function (req, res) {
+  res.render('index', {
+    trails: req.trails,
+    currentPage: 'home',
+    bodyClass: 'index',
+    map: true
+  });
+});
+
+app.get('/trails.geojson', function (req, res) {
+  var featureCollection = {
+    type: 'FeatureCollection',
+    features: req.trails.map (function (trail) {
+      var feature = trail.asGeoJSON();
+      feature.properties['marker-color'] = trail.status === 'open' ? '#060' : '#900';
+      return feature;
+    })
+  };
+
+  res.json(featureCollection);
 });
 
 app.get('/about', function (req, res) {

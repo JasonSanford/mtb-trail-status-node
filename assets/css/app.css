@@ -217,3 +217,7 @@ table.statuses tr.trail i.closed {
     text-align: center;
   }
 }
+
+body.index .map {
+  height: 400px;
+}
