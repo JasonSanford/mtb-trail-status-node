@@ -56,9 +56,10 @@ module.exports = function(sequelize, DataTypes) {
           },
           properties: {
             name: this.name,
+            status: this.status,
+            status_date_string: this.statusDateFromNow(),
             has_geojson: this.geojson_url ? true : false,
-            'marker-symbol': 'bicycle',
-            'marker-size': 'large'
+            'marker-symbol': 'bicycle'
           }
         };
       }

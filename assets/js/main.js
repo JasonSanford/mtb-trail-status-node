@@ -34,7 +34,15 @@ if ($('body.index').length > 0) {
         mapShown = true;
 
         var lineGeojsonLayer = L.geoJson(null, {
-          pointToLayer: L.mapbox.marker.style
+          pointToLayer: L.mapbox.marker.style,
+          onEachFeature: function (feature, layer) {
+            var p = feature.properties;
+            var popupHtml = [
+              '<h2><a href="/trails/' + feature.id + '">' + p.name + '</a></h2>',
+              '<h3>' + p.status + ' - ' + p.status_date_string + '</h3>'
+            ];
+            layer.bindPopup(popupHtml.join(''));
+          }
         });
         lineGeojsonLayer.addTo(map);
 

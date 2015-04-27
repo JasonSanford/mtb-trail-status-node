@@ -221,3 +221,15 @@ table.statuses tr.trail i.closed {
 body.index .map {
   height: 400px;
 }
+
+body.index .map .leaflet-popup h1, 
+body.index .map .leaflet-popup h2, 
+body.index .map .leaflet-popup h3, 
+body.index .map .leaflet-popup h4, 
+body.index .map .leaflet-popup h5 {
+  text-align: center;
+}
+
+body.index .map .leaflet-popup h2, body.index .map .leaflet-popup h3 {
+  margin-bottom: 0;
+}
