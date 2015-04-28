@@ -149,6 +149,10 @@ table.statuses tr.trail i.closed {
     padding: 10px 0;
   }
 
+  .header h3 {
+    font-size: 20px;
+  }
+
   .map-container {
     position: absolute;
     top: 60px;
