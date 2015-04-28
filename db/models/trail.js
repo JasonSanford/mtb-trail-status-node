@@ -62,6 +62,10 @@ module.exports = function(sequelize, DataTypes) {
             'marker-symbol': 'bicycle'
           }
         };
+      },
+      url: function () {
+        var baseUrl = constants.development ? 'http://localhost:5000' : 'http://mtbtrailstat.us';
+        return baseUrl + '/trails/' + this.id;
       }
     },
     hooks: {
@@ -72,7 +76,7 @@ module.exports = function(sequelize, DataTypes) {
             .then(function (phones) {
               phones.forEach(function (phone) {
                 var to = '+1' + phone.number;
-                var message = trail.name + ' is now ' + trail.status + '.';
+                var message = trail.name + ' is now ' + trail.status + '. ' + trail.url();
 
                 twilioClient.sendMessage({
                   to: to,

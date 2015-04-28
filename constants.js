@@ -5,5 +5,6 @@ module.exports = {
   twitter_consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
   twitter_access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
   twitter_access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
-  twilio_phone_number: '+17043438968'
+  twilio_phone_number: '+17043438968',
+  development: 'DEVELOPMENT' in process.env
 };
