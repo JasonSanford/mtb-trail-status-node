@@ -1,3 +1,8 @@
+GREEN = #5CB85C
+WHITE_OPACITY = rgba(255, 255, 255, 0.7)
+OPEN = #060
+CLOSED = #900
+
 body
   padding-bottom 20px
   font-family 'Titillium Web', sans-serif
@@ -7,7 +12,7 @@ body.fullscreen
   padding-bottom 0
 
 .top
-  background-color #5CB85C
+  background-color GREEN
 
   .header
     padding 20px 0
@@ -15,7 +20,7 @@ body.fullscreen
 
     ul.nav li.active a
       background-color #fff
-      color #5CB85C
+      color GREEN
 
     a
       color #fff
@@ -42,7 +47,7 @@ body.fullscreen
 .jumbotron
   text-align center
   padding 30px
-  background-color rgba(255, 255, 255, 0.7)
+  background-color WHITE_OPACITY
   margin-bottom 0
 
   h1
@@ -86,10 +91,10 @@ table.statuses
           color #333
 
       i.open
-        color #060
+        color OPEN
 
       i.closed
-        color: #900
+        color: CLOSED
 
 .map-container
   position: absolute
@@ -104,7 +109,7 @@ table.statuses
     left 0
     width 100%
     z-index 9000
-    background-color rgba(255, 255, 255, 0.5)
+    background-color WHITE_OPACITY
 
     h2
       margin-top 10px
@@ -189,4 +194,4 @@ body.index .map
   margin-bottom 0
 
 body.index .map .leaflet-popup h2 a
-  color #5CB85C
+  color GREEN
