@@ -72,7 +72,14 @@ if ($('body.trail').length > 0) {
 
   if (mtb.trail.properties.has_geojson) {
     var lineGeojsonLayer = L.geoJson(null, {
-      style: L.mapbox.simplestyle.style
+      style: L.mapbox.simplestyle.style,
+      onEachFeature: function (feature, layer) {
+        var p = feature.properties;
+        var popupHtml = [
+          '<h2>' + p.name + '</h2>'
+        ];
+        layer.bindPopup(popupHtml.join(''));
+      }
     });
     lineGeojsonLayer.addTo(map);
 
