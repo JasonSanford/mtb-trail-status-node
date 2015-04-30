@@ -4,9 +4,9 @@ var cheerio = require('cheerio');
 var _       = require('lodash');
 var request = require('request');
 
-var tarheelTrails = require('./trails').tarheel;
-var models        = require('./db/models');
-var utils         = require('./utils');
+var tarheelTrails = require('../trails').tarheel;
+var models        = require('../db/models');
+var utils         = require('../utils');
 
 var tarheelTrailNames = tarheelTrails.map(function (tarheelTrail) {
   return tarheelTrail.name;

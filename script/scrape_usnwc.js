@@ -1,7 +1,7 @@
 var Twitter = require('twitter');
 
-var constants = require('./constants');
-var models = require('./db/models');
+var constants = require('../constants');
+var models = require('../db/models');
 
 var client = new Twitter({
   consumer_key: constants.twitter_consumer_key,
