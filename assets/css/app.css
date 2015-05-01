@@ -132,7 +132,7 @@ table.statuses tr.trail td i.closed {
     line-height: 0.8em;
     text-align: center;
   }
-  .map-container .meta h2.small {
+  .map-container .meta h2 small {
     display: block;
   }
   .full-panel .container {
@@ -191,4 +191,3 @@ body.index .map .leaflet-popup h3 {
 body.index .map .leaflet-popup h2 a {
   color: #5cb85c;
 }
-
