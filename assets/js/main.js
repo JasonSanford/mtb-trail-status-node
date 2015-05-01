@@ -70,24 +70,48 @@ if ($('body.trail').length > 0) {
   map.addLayer(pointGeojsonLayer);
   map.setView(L.latLng(mtb.trail.geometry.coordinates[1], mtb.trail.geometry.coordinates[0]), 13);
 
+  var defaultTrailStyle = {
+    color: '#0b6121',
+    weight: 3,
+    opacity: 0.7
+  };
+
   if (mtb.trail.properties.has_geojson) {
-    var lineGeojsonLayer = L.geoJson(null, {
-      style: L.mapbox.simplestyle.style,
-      onEachFeature: function (feature, layer) {
-        var p = feature.properties;
-        var popupHtml = [
-          '<h2>' + p.name + '</h2>'
-        ];
-        layer.bindPopup(popupHtml.join(''));
+    var legendControl = L.mapbox.legendControl({position: 'bottomleft', sanitizer: function (s) {return s;}});
+    map.addControl(legendControl);
+
+    var featureGroup = L.featureGroup();
+    featureGroup.addTo(map);
+
+    $('.map-legends').on('click', 'a.layer', function (event) {
+      event.preventDefault();
+      var $target = $(event.target);
+      var lineLayers = featureGroup.getLayers();
+      for (var i = 0; i < lineLayers.length; i++) {
+        var layer = lineLayers[i];
+        if (layer.feature.id === $target.data('trail-id')) {
+          layer.setStyle({color: 'red'});
+          map.fitBounds(layer.getBounds());
+        } else {
+          layer.setStyle($.extend({}, defaultTrailStyle));
+        }
       }
     });
-    lineGeojsonLayer.addTo(map);
 
     $.ajax({
       url: '/trails/' + mtb.trail.id + '.geojson',
       success: function (data) {
-        lineGeojsonLayer.addData(data);
-        map.fitBounds(lineGeojsonLayer.getBounds());
+        data.features.forEach(function (feature) {
+          var p = feature.properties;
+          var layer = L.GeoJSON.geometryToLayer(feature);
+
+          layer.feature = feature;
+
+          legendControl.addLegend('<a class="layer" data-trail-id="' + feature.id + '" href="#' + p.name + '">' + p.name + '</a>');
+          layer.setStyle($.extend({}, defaultTrailStyle));
+          featureGroup.addLayer(layer);
+        });
+        map.fitBounds(featureGroup.getBounds());
       },
       error: function (jqXHR, status, error) {
         console.log('Error fetching trail GeoJSON: ' + error);

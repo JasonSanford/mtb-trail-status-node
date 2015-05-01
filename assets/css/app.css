@@ -98,6 +98,14 @@ table.statuses tr.trail td i.closed {
   right: 0;
   bottom: 0;
 }
+.map-container .map-legends .map-legend {
+  font-size: 14px;
+  padding: 1px 10px;
+}
+.map-container .map-legends .map-legend a {
+  color: #5cb85c;
+  margin-bottom: 0;
+}
 .map-container .meta {
   position: absolute;
   top: 0;
@@ -191,3 +199,4 @@ body.index .map .leaflet-popup h3 {
 body.index .map .leaflet-popup h2 a {
   color: #5cb85c;
 }
+
