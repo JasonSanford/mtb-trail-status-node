@@ -114,10 +114,10 @@ table.statuses tr.trail td i.closed {
   height: 100%;
 }
 @media only screen and (min-width: 320px) and (max-width: 600px) {
-  .header {
+  .top .header {
     padding: 10px 0;
   }
-  .header h3 {
+  .top .header h3 {
     font-size: 20px;
   }
   .map-container {
