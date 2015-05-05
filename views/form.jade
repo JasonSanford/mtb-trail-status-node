@@ -13,7 +13,7 @@ block content
             .checkbox
               label
                 input(type='checkbox', name=formTrail.id, checked=formTrail.stored)
-                | #{formTrail.name}
+                | #{formTrail.displayName()}
       .form-group
         .col-sm-10.col-sm-offset-2
           input.btn.btn-success(type='submit', value='Save')

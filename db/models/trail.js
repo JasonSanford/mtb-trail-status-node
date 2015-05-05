@@ -11,6 +11,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    display_name: {
+      type: DataTypes.STRING
+    },
+    slug: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     source: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -56,6 +63,8 @@ module.exports = function(sequelize, DataTypes) {
           },
           properties: {
             name: this.name,
+            display_name: this.displayName(),
+            path: this.path(),
             status: this.status,
             status_date_string: this.statusDateFromNow(),
             has_geojson: this.geojson_url ? true : false,
@@ -65,7 +74,13 @@ module.exports = function(sequelize, DataTypes) {
       },
       url: function () {
         var baseUrl = constants.development ? 'http://localhost:5000' : 'http://mtbtrailstat.us';
-        return baseUrl + '/trails/' + this.id;
+        return baseUrl + this.path();
+      },
+      path: function () {
+        return '/trails/' + this.slug;
+      },
+      displayName: function () {
+        return this.display_name || this.name;
       }
     },
     hooks: {
@@ -76,7 +91,7 @@ module.exports = function(sequelize, DataTypes) {
             .then(function (phones) {
               phones.forEach(function (phone) {
                 var to = '+1' + phone.number;
-                var message = trail.name + ' is now ' + trail.status + '. ' + trail.url();
+                var message = trail.displayName() + ' is now ' + trail.status + '. ' + trail.url();
 
                 twilioClient.sendMessage({
                   to: to,

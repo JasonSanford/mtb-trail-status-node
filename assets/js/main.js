@@ -38,7 +38,7 @@ if ($('body.index').length > 0) {
           onEachFeature: function (feature, layer) {
             var p = feature.properties;
             var popupHtml = [
-              '<h2><a href="/trails/' + feature.id + '">' + p.name + '</a></h2>',
+              '<h2><a href="' + feature.properties.path + '">' + p.display_name + '</a></h2>',
               '<h3>' + p.status + ' - ' + p.status_date_string + '</h3>'
             ];
             layer.bindPopup(popupHtml.join(''));
@@ -99,7 +99,7 @@ if ($('body.trail').length > 0) {
     });
 
     $.ajax({
-      url: '/trails/' + mtb.trail.id + '.geojson',
+      url: mtb.trail.properties.path + '.geojson',
       success: function (data) {
         data.features.forEach(function (feature) {
           var p = feature.properties;

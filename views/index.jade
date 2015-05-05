@@ -32,11 +32,11 @@ block content
               tr.trail
                 td.name
                   h3
-                    a(href='/trails/#{trail.id}')
+                    a(href='#{trail.path()}')
                       - glyphicon = trail.status === 'open' ? 'glyphicon-ok' : 'glyphicon-remove'
                       i.glyphicon(class='#{glyphicon} #{trail.status}')
                       | 
-                      =trail.name
+                      =trail.displayName()
                 td.date.text-muted
                   span(title='#{trail.status_date}') #{trail.statusDateFromNow()}
       .tab-pane(id='tab-map')

@@ -25,15 +25,21 @@ app.post('/twilio', function (req, res) {
   console.log(JSON.stringify(req.body));
 });
 
-app.use('/trails/:id', function (req, res, next) {
-  var trailId = parseInt(req.params.id, 10);
+app.use('/trails/:slug', function (req, res, next) {
+  var slug = req.params.slug;
 
-  if (isNaN(trailId)) {
+  if (!slug) {
     render404(req, res);
     return;
   }
 
-  models.Trail.find(trailId)
+  // For some reason /trails/trail-name.geojson gets passed with '.geojson' in the slug
+  // TODO: There's probably a better way
+  if (slug.indexOf('.') > -1) {
+    slug = slug.split('.')[0];
+  }
+
+  models.Trail.find({where: {slug: slug}})
     .then(function (trail) {
       if (trail) {
         req.trail = trail;
@@ -44,13 +50,13 @@ app.use('/trails/:id', function (req, res, next) {
     });
 });
 
-app.get('/trails/:id.geojson', function (req, res) {
+app.get('/trails/:slug.geojson', function (req, res) {
   var githubRequest = request(req.trail.geojson_url);
   req.pipe(githubRequest);
   githubRequest.pipe(res);
 });
 
-app.get('/trails/:id', function (req, res) {
+app.get('/trails/:slug', function (req, res) {
   res.render('trail', {
     trail: req.trail,
     map: true,

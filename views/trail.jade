@@ -6,7 +6,7 @@ block content
   .map-container
     #map.map
     .meta
-      h2.name #{trail.name} 
+      h2.name #{trail.displayName()} 
         small #{trail.status} - 
           span(title='#{trail.status_date}') #{trail.statusDateFromNow()}
   script.
