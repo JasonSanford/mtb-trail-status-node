@@ -122,7 +122,10 @@ function handlePhoneFormRequest (req, res) {
                   }
                   return allTrail;
                 });
-                res.render('form', {formTrails: formTrails});
+                res.render('form', {
+                  formTrails: formTrails,
+                  bodyClass: 'form'
+                });
               } else {
                 var checkedIds = Object.keys(req.body).map(function (stringId) {
                   return parseInt(stringId, 10);
