@@ -1,5 +1,5 @@
 {
-  "name": "MTB Trail Status",
+  "name": "mtb-trail-status",
   "version": "1.0.0",
   "description": "A mountain bike trail status site and notification service for Charlotte, NC",
   "main": "index.js",
