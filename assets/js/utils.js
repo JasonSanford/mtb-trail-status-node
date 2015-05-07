@@ -6,8 +6,12 @@ function sanitizePhoneNumber (phone) {
   return sanitized;
 }
 
+function isAllDigits (val) {
+  return (/^[0-9]+$/).test(val);
+}
+
 function isValidPhoneNumber (phoneNumber) {
-  return phoneNumber.length === 10;
+  return phoneNumber.length === 10 && isAllDigits(phoneNumber);
 }
 
 module.exports = {
