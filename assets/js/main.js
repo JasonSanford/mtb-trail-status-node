@@ -72,46 +72,61 @@ if ($('body.trail').length > 0) {
 
   var defaultTrailStyle = {
     color: '#0b6121',
-    weight: 3,
+    weight: 4,
     opacity: 0.7
   };
 
+  var selectedStyle = {
+    color: '#f00'
+  };
+
   if (mtb.trail.properties.has_geojson) {
-    var legendControl = L.mapbox.legendControl({position: 'bottomleft', sanitizer: function (s) {return s;}});
-    map.addControl(legendControl);
+    map.on('click', function () {
+      setLoopSelected();
+    });
 
-    var featureGroup = L.featureGroup();
-    featureGroup.addTo(map);
-
-    $('.map-legends').on('click', 'a.layer', function (event) {
+    $('.meta').on('click', 'a.back', function (event) {
       event.preventDefault();
-      var $target = $(event.target);
-      var lineLayers = featureGroup.getLayers();
-      for (var i = 0; i < lineLayers.length; i++) {
-        var layer = lineLayers[i];
-        if (layer.feature.id === $target.data('trail-id')) {
-          layer.setStyle({color: 'red'});
-          map.fitBounds(layer.getBounds());
-        } else {
-          layer.setStyle($.extend({}, defaultTrailStyle));
-        }
+      setLoopSelected();
+    });
+
+    var geojsonLayer = L.geoJson(null, {
+      style: $.extend({}, defaultTrailStyle),
+      onEachFeature: function (feature, layer) {
+        layer.on('click', function (event) {
+          setLoopSelected(feature, layer);
+        });
       }
     });
+    geojsonLayer.addTo(map);
+
+    var setLoopSelected = function (feature, layer) {
+      geojsonLayer.eachLayer(function (layer) {
+        layer.setStyle($.extend({}, defaultTrailStyle));
+      });
+      if (feature && layer) {
+        layer.setStyle($.extend({}, selectedStyle));
+        map.fitBounds(layer.getBounds());
+
+        var loopHtml = '<a class="back" href="#back"><i class="glyphicon glyphicon-chevron-left"></i></a>';
+        loopHtml += feature.properties.name;
+        if (feature.properties.distance_miles) {
+          loopHtml += '<small>&nbsp;' + feature.properties.distance_miles + ' mi.</small>';
+        }
+
+        $('.meta').find('.trail').hide();
+        $('.meta').find('.loop').show().find('.name').html(loopHtml).show();
+      } else {
+        $('.meta').find('.loop').hide();
+        $('.meta').find('.trail').show();
+      }
+    };
 
     $.ajax({
       url: mtb.trail.properties.path + '.geojson',
       success: function (data) {
-        data.features.forEach(function (feature) {
-          var p = feature.properties;
-          var layer = L.GeoJSON.geometryToLayer(feature);
-
-          layer.feature = feature;
-
-          legendControl.addLegend('<a class="layer" data-trail-id="' + feature.id + '" href="#' + p.name + '">' + p.name + '</a>');
-          layer.setStyle($.extend({}, defaultTrailStyle));
-          featureGroup.addLayer(layer);
-        });
-        map.fitBounds(featureGroup.getBounds());
+        geojsonLayer.addData(data);
+        map.fitBounds(geojsonLayer.getBounds());
       },
       error: function (jqXHR, status, error) {
         console.log('Error fetching trail GeoJSON: ' + error);
