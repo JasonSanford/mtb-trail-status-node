@@ -2,7 +2,7 @@
 
 A mountain bike trail status site and notification service for Charlotte, NC - See it in action at http://mtbtrailstat.us
 
-![rogen](https://www.dropbox.com/s/efn9so96ahu40wm/mtb-trail-360x640.png?dl=0)
+![MTB Trail Status](https://dl.dropboxusercontent.com/u/10994537/mtb-trail-360x640.png)
 
 ## How it Works
 
