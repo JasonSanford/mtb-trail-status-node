@@ -17,6 +17,8 @@ html(lang='en')
     script.
       var mtb = {};
   body(class=(bodyClass || ''))
+    - if (!process.env.DEVELOPMENT)
+      include ./includes/google_analytics.jade
     .top
       .container
         .header.clearfix
