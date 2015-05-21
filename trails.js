@@ -104,6 +104,14 @@ var trails = [
     source: sources.TARHEEL_TRAILBLAZERS,
     latitude: 35.2449197,
     longitude: -81.0479374
+  },
+  {
+    id: 13,
+    name: 'Signal Hill',
+    slug: 'signal-hill',
+    source: sources.TARHEEL_TRAILBLAZERS,
+    latitude: 35.7956417,
+    longitude: -80.85445
   }
 ];
 
