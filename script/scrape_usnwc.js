@@ -9,7 +9,7 @@ var client = new Twitter({
   access_token_key: constants.twitter_access_token_key,
   access_token_secret: constants.twitter_access_token_secret
 });
- 
+
 var params = {
   screen_name: 'usnwctrails',
   count: 1,
@@ -29,9 +29,9 @@ client.get('statuses/user_timeline', params, function(error, tweets, response){
   var tweet = tweets[0];
   var openOrClosed;
 
-  if (tweet.text.indexOf('are open') > -1) {
+  if (tweet.text.indexOf('are open') > -1 || tweet.text.indexOf('are Open') > -1) {
     openOrClosed = 'open';
-  } else if (tweet.text.indexOf('are closed') > -1) {
+  } else if (tweet.text.indexOf('are closed') > -1 || tweet.text.indexOf('are Closed') > -1) {
     openOrClosed = 'closed';
   }
 
